@@ -45,7 +45,13 @@ const priorityColors: Record<string, string> = {
   HIGH: "bg-red-100 text-red-800",
 };
 
-export default function TicketDetailPage() {
+export default function TicketDetailPage({
+  ticketId,
+  userTicket,
+}: {
+  ticketId: string;
+  userTicket: any;
+}) {
   const { id } = useParams();
   const [ticket, setTicket] = useState<any>(null);
   const [loading, setLoading] = useState(true);
@@ -78,9 +84,9 @@ export default function TicketDetailPage() {
     async function fetchTicket() {
       setLoading(true);
       try {
-        const res = await api.get(`/tickets/${id}`);
+        const res = await api.get(`/tickets/${id ?? ticketId}`);
         setTicket(res.data);
-        console.log(res, "***")
+        console.log(res, "***");
       } catch {
         setTicket(null);
       }
@@ -90,7 +96,7 @@ export default function TicketDetailPage() {
   }, [id]);
 
   useEffect(() => {
-    console.log(ticket, "ticketticket")
+    console.log(ticket, "ticketticket");
     if (ticket?.comments) setComments(ticket.comments);
   }, [ticket]);
 
@@ -123,16 +129,24 @@ export default function TicketDetailPage() {
       createdAt: new Date().toISOString(),
       author: user?.id,
     };
-
-    // Emit the new comment to the server
-    socket.emit("addComment", {
+    //userTicket
+    const loggedData = {
       ticketId: id,
       content: newComment,
       authorId: user?.id,
-    });
+    };
+
+    const externalData = {
+      ticketId: ticketId,
+      content: newComment,
+      externalName: userTicket?.externalName,
+      externalEmail: userTicket?.externalEmail,
+    };
+    // Emit the new comment to the server
+    socket.emit("addComment", userTicket ? externalData : loggedData);
 
     // Update local state immediately (optional, can rely on WebSocket)
-  //  setComments((prev) => [...prev, comment]);
+    //  setComments((prev) => [...prev, comment]);
     setNewComment("");
   }
 
@@ -216,7 +230,7 @@ export default function TicketDetailPage() {
                     <User className="h-4 w-4" /> Criado por:
                   </span>
                   <span className="font-medium">
-                    {ticket.createdBy?.name ?? "-"}
+                    {ticket.createdBy?.name ?? ticket?.externalName}
                   </span>
                 </div>
                 <div className="flex flex-col gap-1 pt-4 sm:pl-8 sm:pt-0">
