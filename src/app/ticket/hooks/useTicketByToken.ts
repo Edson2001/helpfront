@@ -19,12 +19,6 @@ export const useTicketByToken = (token: string) => {
       const response = await api.get(`/tickets/ticket-by-token/${token}`);
       return response.data;
     },
-    onError: (error) => {
-      toast.error(
-        "Não foi possível carregar os dados do ticket. Por favor, verifique o token e tente novamente.",
-        { duration: 6000 },
-      );
-    },
-    enabled: !!token, // Só executa a query se o token existir
+    enabled: !!token,
   });
 };
