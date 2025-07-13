@@ -5,7 +5,7 @@ interface User {
   id: string;
   name: string;
   email: string;
-  role: string
+  role: string;
   // Adicione outros campos conforme necessário
 }
 
@@ -14,6 +14,8 @@ interface UserStore {
   loading: boolean;
   error: string | null;
   fetchUser: () => Promise<void>;
+  setUser: (user: User) => void;
+  clearUser: () => void;
 }
 
 export const useUserStore = create<UserStore>((set) => ({
@@ -27,8 +29,10 @@ export const useUserStore = create<UserStore>((set) => ({
       console.log(response?.data, "****---");
       set({ user: response.data, loading: false });
     } catch (err) {
-        console.log(err, "))))))))))))))")
+      console.log(err, "))))))))))))))");
       set({ error: "Failed to fetch user data", loading: false });
     }
   },
+  setUser: (user) => set({ user }),
+  clearUser: () => set({ user: null }),
 }));
