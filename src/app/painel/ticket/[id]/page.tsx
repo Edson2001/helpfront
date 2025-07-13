@@ -45,8 +45,13 @@ const priorityColors: Record<string, string> = {
   HIGH: "bg-red-100 text-red-800",
 };
 
-export default function TicketDetailPage({ ticketId }: { ticketId: string }) {
-  
+export default function TicketDetailPage({
+  ticketId,
+  userTicket,
+}: {
+  ticketId: string;
+  userTicket: any;
+}) {
   const { id } = useParams();
   const [ticket, setTicket] = useState<any>(null);
   const [loading, setLoading] = useState(true);
@@ -124,13 +129,21 @@ export default function TicketDetailPage({ ticketId }: { ticketId: string }) {
       createdAt: new Date().toISOString(),
       author: user?.id,
     };
-
-    // Emit the new comment to the server
-    socket.emit("addComment", {
+    //userTicket
+    const loggedData = {
       ticketId: id,
       content: newComment,
       authorId: user?.id,
-    });
+    };
+
+    const externalData = {
+      ticketId: ticketId,
+      content: newComment,
+      externalName: userTicket?.externalName,
+      externalEmail: userTicket?.externalEmail,
+    };
+    // Emit the new comment to the server
+    socket.emit("addComment", userTicket ? externalData : loggedData);
 
     // Update local state immediately (optional, can rely on WebSocket)
     //  setComments((prev) => [...prev, comment]);

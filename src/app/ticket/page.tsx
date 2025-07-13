@@ -13,5 +13,5 @@ export default function Page() {
   if (isLoading) return <div>Carregando...</div>;
   if (error) return <div>Erro ao carregar o ticket.</div>;
 
-  return <TicketDetailPage ticketId={ticket?.id || ""} />;
+  return <TicketDetailPage ticketId={ticket?.id || ""} userTicket={ticket} />;
 }
