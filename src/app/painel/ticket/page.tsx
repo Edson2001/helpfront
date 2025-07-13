@@ -454,7 +454,9 @@ export default function TicketPage() {
               <TableHead className="w-1/4">Título</TableHead>
               <TableHead>Status</TableHead>
               <TableHead>Prioridade</TableHead>
+              
               <TableHead>Criado em</TableHead>
+              <TableHead>Email</TableHead>
               <TableHead>Criado por</TableHead>
               <TableHead>Técnico</TableHead>
               <TableHead>Ações</TableHead>
@@ -485,7 +487,8 @@ export default function TicketPage() {
                 <TableCell>
                   {new Date(ticket.createdAt).toLocaleString("pt-PT")}
                 </TableCell>
-                <TableCell>{ticket.createdBy?.name ?? "-"}</TableCell>
+                <TableCell>{ticket.createdBy?.email ?? ticket?.externalEmail}</TableCell>
+                <TableCell>{ticket.createdBy?.name ?? ticket?.externalName}</TableCell>
                 <TableCell>
                   {user?.role == "ADMIN" ? (
                     <Select
