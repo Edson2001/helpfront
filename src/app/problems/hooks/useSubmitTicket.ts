@@ -42,7 +42,6 @@ export const useSubmitTicket = () => {
         "Oops! Algo deu errado ao enviar seu ticket. Por favor, tente novamente ou entre em contato com o suporte.",
         { duration: 6000 },
       );
-      console.error("Erro ao enviar o ticket:", error);
     },
   });
 };
