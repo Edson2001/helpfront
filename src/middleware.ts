@@ -1,25 +1,33 @@
 // middleware.ts
+import * as cookie from "cookie";
 import { NextRequest, NextResponse } from "next/server";
 import { useUserStore } from "./stores/userStore";
 
 export function middleware(request: NextRequest) {
   const token = request.cookies.get("token")?.value;
-   
+  const userToken = request.cookies.get("user")?.value;
+  console.log("Cookie 'user':", userToken); // Depuração
+
+  // Analisar o cookie 'user' para obter os dados do usuário
+  let userData = null;
+  try {
+    userData = userToken ? JSON.parse(userToken) : null;
+    console.log("Dados do usuário analisados:", userData); // Depuração
+  } catch (error) {
+    console.error("Erro ao analisar o cookie 'user':", error);
+  }
+
   const isProtectedRoute = request.nextUrl.pathname.startsWith("/painel");
   const isAdminRoute = request.nextUrl.pathname.startsWith("/painel/users");
 
   if (isProtectedRoute && !token) {
-    
     return NextResponse.redirect(new URL("/login", request.url));
   }
-  if(!isProtectedRoute){
-    request.cookies.delete("token")
-  }
+
+  console.log("user", userToken);
 
   if (isAdminRoute) {
-    // Simulando a obtenção do usuário do userStore (você pode adaptar para buscar do backend)
-    const user = useUserStore.getState().user;
-    if (user?.role !== "ADMIN") {
+    if (userData?.role !== "ADMIN") {
       return NextResponse.redirect(new URL("/painel", request.url));
     }
   }
