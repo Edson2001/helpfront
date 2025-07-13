@@ -230,7 +230,7 @@ export default function TicketDetailPage({
                     <User className="h-4 w-4" /> Criado por:
                   </span>
                   <span className="font-medium">
-                    {ticket.createdBy?.name ?? "-"}
+                    {ticket.createdBy?.name ?? ticket?.externalName}
                   </span>
                 </div>
                 <div className="flex flex-col gap-1 pt-4 sm:pl-8 sm:pt-0">
