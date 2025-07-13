@@ -60,7 +60,7 @@ export default function ModalCreateTicket({
       );
     } else {
       create(
-        { title, description, priority, createdById: user?.id },
+        { title, description, priority, createdById: String(user?.id) },
         {
           onSuccess: () => {
             handleChange();
