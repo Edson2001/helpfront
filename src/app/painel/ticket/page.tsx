@@ -1,6 +1,6 @@
 "use client";
 
-import { FileText } from "lucide-react";
+import { FileText, Ticket } from "lucide-react";
 import { Check, Loader2 } from "lucide-react";
 import { AlertCircle } from "lucide-react";
 import Link from "next/link";
@@ -31,8 +31,10 @@ import {
 import { useUserStore } from "@/stores/userStore";
 import { useAssignTicket } from "../hooks/useAssignTicket";
 import { useList } from "../hooks/useList";
+import { useUpdateTicket } from "../hooks/useUpdateTicket";
 import { useUpdateTicketStatus } from "../hooks/useUpdateTicketStatus";
 import { useUsers } from "../users/hooks/getData";
+import ModalCreateTicket from "./components/ModalCreateTicket";
 
 // Importar a biblioteca react-hot-toast
 
@@ -106,6 +108,9 @@ export default function TicketPage() {
       },
     );
   };
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedTicket, setSelectedTicket] = useState<any>(null);
 
   // Estado local para simular atualização
   const [updatingId, setUpdatingId] = useState<string | null>(null);
@@ -219,6 +224,11 @@ export default function TicketPage() {
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "Tickets");
     XLSX.writeFile(workbook, "tickets.xlsx");
+  };
+
+  const handleEdit = (ticket: any) => {
+    setSelectedTicket(ticket);
+    setIsModalOpen(true);
   };
 
   if (isLoading)
@@ -427,6 +437,14 @@ export default function TicketPage() {
             Exportar Dados
           </Button>
         </div>
+        <div className="flex flex-col">
+          <label className="mr-2 text-sm font-medium">
+            <Ticket />
+          </label>
+          <Button onClick={() => setIsModalOpen(true)} variant="outline">
+            Criar Ticket
+          </Button>
+        </div>
       </div>
       <div className="overflow-x-auto rounded-lg border bg-white shadow-sm">
         <Table>
@@ -499,7 +517,7 @@ export default function TicketPage() {
                 <TableCell>
                   <div className="flex items-center gap-2">
                     {user?.role == "CLIENT" ? (
-                     <></>
+                      <></>
                     ) : (
                       <Select
                         value={ticket.status}
@@ -555,6 +573,28 @@ export default function TicketPage() {
                         </svg>
                       </Button>
                     </Link>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      className="ml-2"
+                      title="Editar ticket"
+                      onClick={() => handleEdit(ticket)}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-4 w-4"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                        />
+                      </svg>
+                    </Button>
                   </div>
                 </TableCell>
               </TableRow>
@@ -605,6 +645,14 @@ export default function TicketPage() {
           </Button>
         </div>
       </div>
+      <ModalCreateTicket
+        open={isModalOpen}
+        handleChange={() => {
+          setIsModalOpen(false);
+          setSelectedTicket(null);
+        }}
+        ticket={selectedTicket}
+      />
     </section>
   );
 }
