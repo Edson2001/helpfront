@@ -45,7 +45,8 @@ const priorityColors: Record<string, string> = {
   HIGH: "bg-red-100 text-red-800",
 };
 
-export default function TicketDetailPage() {
+export default function TicketDetailPage({ ticketId }: { ticketId: string }) {
+  
   const { id } = useParams();
   const [ticket, setTicket] = useState<any>(null);
   const [loading, setLoading] = useState(true);
@@ -78,9 +79,9 @@ export default function TicketDetailPage() {
     async function fetchTicket() {
       setLoading(true);
       try {
-        const res = await api.get(`/tickets/${id}`);
+        const res = await api.get(`/tickets/${id ?? ticketId}`);
         setTicket(res.data);
-        console.log(res, "***")
+        console.log(res, "***");
       } catch {
         setTicket(null);
       }
@@ -90,7 +91,7 @@ export default function TicketDetailPage() {
   }, [id]);
 
   useEffect(() => {
-    console.log(ticket, "ticketticket")
+    console.log(ticket, "ticketticket");
     if (ticket?.comments) setComments(ticket.comments);
   }, [ticket]);
 
@@ -132,7 +133,7 @@ export default function TicketDetailPage() {
     });
 
     // Update local state immediately (optional, can rely on WebSocket)
-  //  setComments((prev) => [...prev, comment]);
+    //  setComments((prev) => [...prev, comment]);
     setNewComment("");
   }
 
