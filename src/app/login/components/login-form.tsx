@@ -33,12 +33,21 @@ export function LoginForm({
 
   const loginMutation = useLogin();
   const [error, setError] = useState<string | null>(null);
+/* const { user, loading, error, fetchUser } = useUserStore();
 
+  useEffect(() => {
+    if (!user) {
+      fetchUser();
+    }
+  }, [user, fetchUser]); */
   const onSubmit = (data: LoginFormData) => {
     loginMutation.mutate(data, {
       onError: (error: any) => {
         if (error.response?.status === 401) {
-          setError(error.response?.data?.message ?? "Credenciais inválidas. Por favor, tente novamente.");
+          setError(
+            error.response?.data?.message ??
+              "Credenciais inválidas. Por favor, tente novamente.",
+          );
         } else {
           setError(
             "Ocorreu um erro ao tentar fazer login. Tente novamente mais tarde.",
@@ -98,7 +107,11 @@ export function LoginForm({
             </span>
           )}
         </div>
-        <Button disabled={loginMutation.isPending} type="submit" className="w-full">
+        <Button
+          disabled={loginMutation.isPending}
+          type="submit"
+          className="w-full"
+        >
           {loginMutation.isPending ? "Entrando..." : "Entrar"}
         </Button>
         <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
