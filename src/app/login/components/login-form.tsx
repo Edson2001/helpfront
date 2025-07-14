@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Turnstile from "react-turnstile";
@@ -116,7 +117,7 @@ export function LoginForm({
             </span>
           )}
         </div>
-        
+
         <Button
           disabled={loginMutation.isPending}
           type="submit"
@@ -136,9 +137,9 @@ export function LoginForm({
       </div>
       <div className="text-center text-sm">
         Não tem uma conta?{" "}
-        <a href="#" className="underline underline-offset-4">
+        <Link href="/login" className="underline underline-offset-4">
           Cadastre-se
-        </a>
+        </Link>
       </div>
     </form>
   );
