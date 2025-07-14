@@ -3,13 +3,14 @@ import * as cookie from "cookie";
 import { NextApiRequest, NextApiResponse } from "next";
 export const runtime = 'edge';
 export async function POST(req: Request) {
-  const { email, password } = await req.json();
+  const { email, password, turnstileToken } = await req.json();
   try {
     const routePath = "http://localhost:3006/auth/login";
 
     const response = await axios.post(routePath, {
       email,
       password,
+      turnstileToken
     });
 
     const token = response.data; //?.access_token;

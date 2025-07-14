@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 
 interface LoginData {
   email: string;
+  turnstileToken: string
   password: string;
 }
 
