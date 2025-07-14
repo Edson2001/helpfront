@@ -1,7 +1,7 @@
 import axios from "axios";
 import * as cookie from "cookie";
 import { NextApiRequest, NextApiResponse } from "next";
-
+export const runtime = 'edge';
 export async function POST(req: Request) {
   const { email, password } = await req.json();
   try {

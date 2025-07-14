@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { useSubmitTicket } from "../hooks/useSubmitTicket";
-
+export const runtime = 'edge';
 interface FormData {
   title: string;
   description: string;
