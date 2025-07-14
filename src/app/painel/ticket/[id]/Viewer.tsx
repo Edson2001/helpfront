@@ -64,7 +64,7 @@ export default function TicketDetailPage({
   const { user } = useUserStore();
   useEffect(() => {
     // Initialize Socket.IO connection
-    const socketInstance = io("http://localhost:3006");
+    const socketInstance = io(process.env.NEXT_PUBLIC_BACK_URL);
     setSocket(socketInstance);
 
     socketInstance.on("connect", () => {

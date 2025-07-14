@@ -49,7 +49,7 @@ export function LoginForm({
       return;
     }
     loginMutation.mutate(
-      { ...data },
+      { ...data, turnstileToken: token },
       {
         onError: (error: any) => {
           if (error.response?.status === 401) {

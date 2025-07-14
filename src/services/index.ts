@@ -4,7 +4,7 @@ function getBaseURL() {
   if (typeof window !== "undefined") {
     return `${window.location.protocol}//${window.location.hostname}:3006`;
   } else {
-    return "http://localhost:3006";
+    return process.env.NEXT_PUBLIC_BACK_URL;
   }
 }
 
