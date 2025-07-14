@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npm install --legacy-peer-deps && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
@@ -29,11 +29,12 @@
     "lucide-react": "^0.436.0",
     "next": "15.0.1",
     "next-themes": "^0.3.0",
-    "react": "19.0.0-rc-69d4b800-20241021",
+    "react": "^18.2.0",
     "react-day-picker": "8.10.1",
-    "react-dom": "19.0.0-rc-69d4b800-20241021",
+    "react-dom": "^18.2.0",
     "react-hook-form": "^7.60.0",
     "react-hot-toast": "^2.5.2",
+    "react-turnstile": "^1.1.4",
     "socket.io-client": "^4.8.1",
     "sonner": "^2.0.6",
     "tailwind-merge": "^2.5.2",
@@ -46,8 +47,8 @@
     "@cloudflare/next-on-pages": "^1.13.12",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@types/node": "^20",
-    "@types/react": "npm:types-react@19.0.0-rc.1",
-    "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",
+    "@types/react": "^18.2.47",
+    "@types/react-dom": "^18.2.17",
     "@typescript-eslint/eslint-plugin": "^8.3.0",
     "@typescript-eslint/parser": "^8.3.0",
     "eslint": "^8.57.0",
@@ -57,11 +58,5 @@
     "prettier-plugin-tailwindcss": "^0.6.6",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.5.4"
-  },
-  "pnpm": {
-    "overrides": {
-      "@types/react": "npm:types-react@19.0.0-rc.1",
-      "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1"
-    }
   }
 }
