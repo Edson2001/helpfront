@@ -32,7 +32,7 @@ const Hero = () => {
                 dos seus clientes com nossa solução completa de helpdesk.
               </p>
 
-              <div className="mt-10">
+              {/* <div className="mt-10">
                 <form onSubmit={handleSubmit}>
                   <div className="flex flex-wrap gap-5">
                     <input
@@ -54,7 +54,7 @@ const Hero = () => {
                 <p className="mt-5 text-black dark:text-white">
                   Experimente grátis - Sem necessidade de cartão de crédito.
                 </p>
-              </div>
+              </div> */}
             </div>
 
             <div className="animate_right hidden md:w-1/2 lg:block">
@@ -84,14 +84,14 @@ const Hero = () => {
                 <div className="relative aspect-700/444 w-full">
                   {/* Substitua essas imagens por imagens do seu helpdesk */}
                   <Image
-                    className="shadow-solid-l dark:hidden"
-                    src="/images/hero/hero-light.svg"
+                    className="shadow-solid-l dark:hidden !h-auto"
+                    src="/images/6032733570046479023.jpg"
                     alt="RedHelp Dashboard"
                     fill
                   />
                   <Image
-                    className="hidden shadow-solid-l dark:block"
-                    src="/images/hero/hero-dark.svg"
+                    className="hidden shadow-solid-l dark:block !h-auto"
+                    src="/images/6032733570046479030.jpg"
                     alt="RedHelp Dashboard"
                     fill
                   />

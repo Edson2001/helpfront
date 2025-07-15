@@ -1,16 +1,13 @@
 "use client";
 
-
 import { ThemeProvider } from "next-themes";
 import { Inter } from "next/font/google";
- 
-import Lines from "./components/Lines";
-import Header from "./components/Header";
 import Footer from "./components/Footer";
+import Header from "./components/Header";
+import Lines from "./components/Lines";
 import ScrollToTop from "./components/ScrollToTop";
-const inter = Inter({ subsets: ["latin"] });
 
- 
+const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({
   children,
@@ -18,8 +15,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`dark:bg-black ${inter.className} site`}>
+    <>
+      <div className={`dark:bg-black ${inter.className} site`}>
         <ThemeProvider
           enableSystem={false}
           attribute="class"
@@ -32,7 +29,7 @@ export default function RootLayout({
           <Footer />
           <ScrollToTop />
         </ThemeProvider>
-      </body>
-    </html>
+      </div>
+    </>
   );
 }

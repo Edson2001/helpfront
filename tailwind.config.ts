@@ -22,6 +22,7 @@ const config = {
     extend: {
       zIndex: {
         "1": "1",
+        "-1": "-1", // Adiciona -z-1
       },
       fontFamily: {
         sans: ["var(--font-gabarito)", ...fontFamily.sans],
@@ -115,6 +116,8 @@ const config = {
         "29": "7.25rem", // xl:gap-29 (7.25rem = 116px / 16)
         "15": "3.75rem", // 60px (não está explícito, mas pode ser inferido)
         "20": "5rem", // 80px
+        "4.5": "1.125rem", // Adiciona mb-4.5 (18px)
+        "32.5": "8.125rem", // Adiciona gap-32.5 (130px)
         /* "25": "6.25rem", // 100px (mantenha apenas esta linha)
         "30": "7.5rem", // 120px */
       },
@@ -145,6 +148,9 @@ const config = {
       backgroundImage: {
         "linear-to-t":
           "linear-gradient(to top, var(--tw-gradient-from), var(--tw-gradient-to))",
+      },
+      aspectRatio: {
+        "700/444": "700 / 444", // Adiciona aspect-700/444
       },
     },
   },
