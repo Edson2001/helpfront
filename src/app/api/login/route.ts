@@ -5,7 +5,7 @@ export const runtime = 'edge';
 export async function POST(req: Request) {
   const { email, password, turnstileToken } = await req.json();
   try {
-    const routePath = process.env.NEXT_PUBLIC_FRONT_URL+"/auth/login";
+    const routePath = process.env.NEXT_PUBLIC_BACK_URL+"/auth/login";
 
     const response = await axios.post(routePath, {
       email,
