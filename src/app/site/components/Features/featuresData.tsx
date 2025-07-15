@@ -1,47 +1,81 @@
-import { Feature } from "@/types/feature";
+/* const featuresData = [
+  {
+    id: 1,
+    icon: "📊",
+    title: "Atendimento Centralizado",
+    description: "Gerencie todos os chamados em um único lugar, com histórico completo e acompanhamento em tempo real.",
+  },
+  {
+    id: 2,
+    icon: "🤖",
+    title: "Automatização de Fluxos",
+    description: "Reduza o tempo de resposta com automação de tarefas repetitivas e direcionamento inteligente.",
+  },
+  {
+    id: 3,
+    icon: "📈",
+    title: "Relatórios e Métricas",
+    description: "Acesse dados detalhados sobre desempenho e satisfação do cliente.",
+  },
+  {
+    id: 4,
+    icon: "🔗",
+    title: "Integração com Canais",
+    description: "Centralize comunicações de e-mail, chat e redes sociais em uma única plataforma.",
+  },
+  {
+    id: 5,
+    icon: "👥",
+    title: "Colaboração em Equipe",
+    description: "Atribua chamados, compartilhe notas internas e trabalhe em conjunto para resolver problemas.",
+  },
+  {
+    id: 6,
+    icon: "🎨",
+    title: "Personalização",
+    description: "Adapte o sistema às necessidades da sua equipe com campos e fluxos configuráveis.",
+  },
+];
 
-const featuresData: Feature[] = [
+export default featuresData; */
+const featuresData: any[] = [
   {
     id: 1,
     icon: "/images/icon/icon-01.svg",
-    title: "Crafted for SaaS",
+    title: "Atendimento Centralizado",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor.",
+      "Gerencie todos os chamados em um único lugar, com histórico completo e acompanhamento em tempo real.",
   },
   {
     id: 2,
     icon: "/images/icon/icon-02.svg",
-    title: "High-quality Design",
+    title: "Automatização de Fluxos",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor.",
+      "Reduza o tempo de resposta com automação de tarefas repetitivas e direcionamento inteligente.",
   },
   {
     id: 3,
     icon: "/images/icon/icon-03.svg",
-    title: "Next.js 13 + TypeScript",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor.",
+    title: "Relatórios e Métricas",
+    description: "Acesse dados detalhados sobre desempenho e satisfação do cliente.",
   },
   {
     id: 4,
     icon: "/images/icon/icon-04.svg",
-    title: "Sanity Blog and Docs",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor.",
+    title: "Integração com Canais",
+    description: "Centralize comunicações de e-mail, chat e redes sociais em uma única plataforma.",
   },
   {
     id: 5,
     icon: "/images/icon/icon-05.svg",
-    title: "DB, Auth and Stripe",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor.",
+    title: "Colaboração em Equipe",
+    description: "Atribua chamados, compartilhe notas internas e trabalhe em conjunto para resolver problemas.",
   },
   {
     id: 6,
     icon: "/images/icon/icon-06.svg",
-    title: "Regular Free Updates",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor.",
+    title: "Personalização",
+    description: "Adapte o sistema às necessidades da sua equipe com campos e fluxos configuráveis.",
   },
 ];
 

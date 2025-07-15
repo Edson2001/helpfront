@@ -1,27 +1,32 @@
-import { FeatureTab } from "@/types/featureTab";
-
-const featuresTabData: FeatureTab[] = [
+ 
+const featuresTabData: any[] = [
   {
     id: "tabOne",
-    title: "Solid Has Neat & Clean User Interface.",
-    desc1: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ultricies lacus non fermentum ultrices. Fusce consectetur le.`,
-    desc2: `    Nam id eleifend dui, id iaculis purus. Etiam lobortis neque nec finibus sagittis. Nulla ligula nunc egestas ut.`,
+    title: "Interface Intuitiva e Amigável",
+    desc1:
+      "Nossa plataforma oferece uma interface limpa e fácil de usar, projetada para otimizar o fluxo de trabalho da sua equipe de atendimento.",
+    desc2:
+      "Com navegação simplificada e design responsivo, você pode gerenciar chamados de qualquer dispositivo.",
     image: "/images/features/features-light-01.png",
     imageDark: "/images/features/features-dark-01.svg",
   },
   {
     id: "tabTwo",
-    title: "Ready to Use Pages You Need for a SaaS Business.",
-    desc1: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ultricies lacus non fermentum ultrices. Fusce consectetur le.`,
-    desc2: `    Nam id eleifend dui, id iaculis purus. Etiam lobortis neque nec finibus sagittis. Nulla ligula nunc egestas ut.`,
+    title: "Páginas Essenciais para Atendimento",
+    desc1:
+      "Incluímos todas as páginas necessárias para um sistema de helpdesk eficiente, como painel de tickets, relatórios e configurações.",
+    desc2:
+      "Personalize cada página para atender às necessidades específicas da sua equipe e clientes.",
     image: "/images/features/features-light-01.png",
     imageDark: "/images/features/features-dark-01.svg",
   },
   {
     id: "tabThree",
-    title: "Functional Blog, DB, Auth and Many More",
-    desc1: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ultricies lacus non fermentum ultrices. Fusce consectetur le.`,
-    desc2: `Nam id eleifend dui, id iaculis purus. Etiam lobortis neque nec finibus sagittis. Nulla ligula nunc egestas ut.`,
+    title: "Integrações Poderosas",
+    desc1:
+      "Conecte-se com e-mail, chat, redes sociais e outros canais de comunicação para centralizar todo o atendimento.",
+    desc2:
+      "Automatize tarefas repetitivas e melhore a eficiência com integrações pré-configuradas.",
     image: "/images/features/features-light-01.png",
     imageDark: "/images/features/features-dark-01.svg",
   },

@@ -18,7 +18,7 @@ import { Gabarito } from "next/font/google";
 import { SideNav, TopNav } from "@/components/nav";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
-import "@/style/globals.css";
+//import "@/style/globals.css";
  
 
 const gabarito = Gabarito({ subsets: ["latin"], variable: "--font-gabarito" });

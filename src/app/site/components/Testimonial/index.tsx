@@ -1,12 +1,11 @@
 "use client";
-import SectionHeader from "../Common/SectionHeader";
- 
+
+import { motion } from "framer-motion";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
-
-import { motion } from "framer-motion";
+import SectionHeader from "../Common/SectionHeader";
 import SingleTestimonial from "./SingleTestimonial";
 import { testimonialData } from "./testimonialData";
 
@@ -14,14 +13,14 @@ const Testimonial = () => {
   return (
     <>
       <section>
-        <div className="mx-auto max-w-c-1315 px-4 md:px-8 xl:px-0">
+        <div className="max-w-c-1315 mx-auto px-4 md:px-8 xl:px-0">
           {/* <!-- Section Title Start --> */}
           <div className="animate_top mx-auto text-center">
             <SectionHeader
               headerInfo={{
-                title: `TESTIMONIALS`,
-                subtitle: `Client’s Testimonials`,
-                description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor eros. Donec vitae tortor lacus. Phasellus aliquam ante in maximus.`,
+                title: `DEPOIMENTOS`,
+                subtitle: `O que nossos clientes dizem`,
+                description: `Veja como nossa plataforma de helpdesk está transformando o atendimento ao cliente e aumentando a eficiência das equipes.`,
               }}
             />
           </div>
@@ -44,10 +43,10 @@ const Testimonial = () => {
           whileInView="visible"
           transition={{ duration: 1, delay: 0.1 }}
           viewport={{ once: true }}
-          className="animate_top mx-auto mt-15 max-w-c-1235 px-4 md:px-8 xl:mt-20 xl:px-0"
+          className="animate_top mt-15 max-w-c-1235 mx-auto px-4 md:px-8 xl:mt-20 xl:px-0"
         >
           {/* <!-- Slider main container --> */}
-          <div className="swiper testimonial-01 mb-20 pb-22.5">
+          <div className="swiper testimonial-01 pb-22.5 mb-20">
             {/* <!-- Additional required wrapper --> */}
             <Swiper
               spaceBetween={50}

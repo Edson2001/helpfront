@@ -1,4 +1,5 @@
 "use client";
+
 import { motion } from "framer-motion";
 import Image from "next/image";
 import React from "react";
@@ -20,9 +21,9 @@ const Contact = () => {
     <>
       {/* <!-- ===== Contact Start ===== --> */}
       <section id="support" className="px-4 md:px-8 2xl:px-0">
-        <div className="relative mx-auto max-w-c-1390 px-7.5 pt-10 lg:px-15 lg:pt-15 xl:px-20 xl:pt-20">
-          <div className="absolute left-0 top-0 -z-1 h-2/3 w-full rounded-lg bg-linear-to-t from-transparent to-[#dee7ff47] dark:bg-linear-to-t dark:to-[#252A42]"></div>
-          <div className="absolute bottom-[-255px] left-0 -z-1 h-full w-full">
+        <div className="max-w-c-1390 px-7.5 lg:px-15 lg:pt-15 relative mx-auto pt-10 xl:px-20 xl:pt-20">
+          <div className="-z-1 bg-linear-to-t dark:bg-linear-to-t absolute left-0 top-0 h-2/3 w-full rounded-lg from-transparent to-[#dee7ff47] dark:to-[#252A42]"></div>
+          <div className="-z-1 absolute bottom-[-255px] left-0 h-full w-full">
             <Image
               src="./images/shape/shape-dotted-light.svg"
               alt="Dotted"
@@ -54,62 +55,62 @@ const Contact = () => {
               whileInView="visible"
               transition={{ duration: 1, delay: 0.1 }}
               viewport={{ once: true }}
-              className="animate_top w-full rounded-lg bg-white p-7.5 shadow-solid-8 dark:border dark:border-strokedark dark:bg-black md:w-3/5 lg:w-3/4 xl:p-15"
+              className="animate_top p-7.5 shadow-solid-8 dark:border-strokedark xl:p-15 w-full rounded-lg bg-white dark:border dark:bg-black md:w-3/5 lg:w-3/4"
             >
-              <h2 className="mb-15 text-3xl font-semibold text-black dark:text-white xl:text-sectiontitle2">
-                Send a message
+              <h2 className="mb-15 xl:text-sectiontitle2 text-3xl font-semibold text-black dark:text-white">
+                Envie uma mensagem
               </h2>
 
               <form
                 action="https://formbold.com/s/unique_form_id"
                 method="POST"
               >
-                <div className="mb-7.5 flex flex-col gap-7.5 lg:flex-row lg:justify-between lg:gap-14">
+                <div className="mb-7.5 gap-7.5 flex flex-col lg:flex-row lg:justify-between lg:gap-14">
                   <input
                     type="text"
-                    placeholder="Full name"
-                    className="w-full border-b border-stroke bg-transparent pb-3.5 focus:border-waterloo focus:placeholder:text-black focus-visible:outline-hidden dark:border-strokedark dark:focus:border-manatee dark:focus:placeholder:text-white lg:w-1/2"
+                    placeholder="Nome completo"
+                    className="border-stroke focus:border-waterloo focus-visible:outline-hidden dark:border-strokedark dark:focus:border-manatee w-full border-b bg-transparent pb-3.5 focus:placeholder:text-black dark:focus:placeholder:text-white lg:w-1/2"
                   />
 
                   <input
                     type="email"
-                    placeholder="Email address"
-                    className="w-full border-b border-stroke bg-transparent pb-3.5 focus:border-waterloo focus:placeholder:text-black focus-visible:outline-hidden dark:border-strokedark dark:focus:border-manatee dark:focus:placeholder:text-white lg:w-1/2"
+                    placeholder="Endereço de e-mail"
+                    className="border-stroke focus:border-waterloo focus-visible:outline-hidden dark:border-strokedark dark:focus:border-manatee w-full border-b bg-transparent pb-3.5 focus:placeholder:text-black dark:focus:placeholder:text-white lg:w-1/2"
                   />
                 </div>
 
-                <div className="mb-12.5 flex flex-col gap-7.5 lg:flex-row lg:justify-between lg:gap-14">
+                <div className="mb-12.5 gap-7.5 flex flex-col lg:flex-row lg:justify-between lg:gap-14">
                   <input
                     type="text"
-                    placeholder="Subject"
-                    className="w-full border-b border-stroke bg-transparent pb-3.5 focus:border-waterloo focus:placeholder:text-black focus-visible:outline-hidden dark:border-strokedark dark:focus:border-manatee dark:focus:placeholder:text-white lg:w-1/2"
+                    placeholder="Assunto"
+                    className="border-stroke focus:border-waterloo focus-visible:outline-hidden dark:border-strokedark dark:focus:border-manatee w-full border-b bg-transparent pb-3.5 focus:placeholder:text-black dark:focus:placeholder:text-white lg:w-1/2"
                   />
 
                   <input
                     type="text"
-                    placeholder="Phone number"
-                    className="w-full border-b border-stroke bg-transparent pb-3.5 focus:border-waterloo focus:placeholder:text-black focus-visible:outline-hidden dark:border-strokedark dark:focus:border-manatee dark:focus:placeholder:text-white lg:w-1/2"
+                    placeholder="Número de telefone"
+                    className="border-stroke focus:border-waterloo focus-visible:outline-hidden dark:border-strokedark dark:focus:border-manatee w-full border-b bg-transparent pb-3.5 focus:placeholder:text-black dark:focus:placeholder:text-white lg:w-1/2"
                   />
                 </div>
 
                 <div className="mb-11.5 flex">
                   <textarea
-                    placeholder="Message"
+                    placeholder="Mensagem"
                     rows={4}
-                    className="w-full border-b border-stroke bg-transparent focus:border-waterloo focus:placeholder:text-black focus-visible:outline-hidden dark:border-strokedark dark:focus:border-manatee dark:focus:placeholder:text-white"
+                    className="border-stroke focus:border-waterloo focus-visible:outline-hidden dark:border-strokedark dark:focus:border-manatee w-full border-b bg-transparent focus:placeholder:text-black dark:focus:placeholder:text-white"
                   ></textarea>
                 </div>
 
-                <div className="flex flex-wrap gap-4 xl:justify-between ">
+                <div className="flex flex-wrap gap-4 xl:justify-between">
                   <div className="mb-4 flex md:mb-0">
                     <input
                       id="default-checkbox"
                       type="checkbox"
                       className="peer sr-only"
                     />
-                    <span className="border-gray-300 bg-gray-100 text-blue-600 dark:border-gray-600 dark:bg-gray-700 group mt-2 flex h-5 min-w-[20px] items-center justify-center rounded-sm peer-checked:bg-primary">
+                    <span className="group mt-2 flex h-5 min-w-[20px] items-center justify-center rounded-sm border-gray-300 bg-gray-100 text-blue-600 peer-checked:bg-primary dark:border-gray-600 dark:bg-gray-700">
                       <svg
-                        className="opacity-0 in-[.group]:peer-checked:opacity-100"
+                        className="in-[.group]:peer-checked:opacity-100 opacity-0"
                         width="10"
                         height="8"
                         viewBox="0 0 10 8"
@@ -128,16 +129,16 @@ const Contact = () => {
                       htmlFor="default-checkbox"
                       className="flex max-w-[425px] cursor-pointer select-none pl-5"
                     >
-                      By clicking Checkbox, you agree to use our “Form” terms
-                      And consent cookie usage in browser.
+                      Ao marcar esta caixa, você concorda com os nossos "Termos
+                      de Uso" e o uso de cookies no navegador.
                     </label>
                   </div>
 
                   <button
                     aria-label="send message"
-                    className="inline-flex items-center gap-2.5 rounded-full bg-black px-6 py-3 font-medium text-white duration-300 ease-in-out hover:bg-blackho dark:bg-btndark"
+                    className="hover:bg-blackho dark:bg-btndark inline-flex items-center gap-2.5 rounded-full bg-black px-6 py-3 font-medium text-white duration-300 ease-in-out"
                   >
-                    Send Message
+                    Enviar Mensagem
                     <svg
                       className="fill-white"
                       width="14"
@@ -172,32 +173,32 @@ const Contact = () => {
               whileInView="visible"
               transition={{ duration: 2, delay: 0.1 }}
               viewport={{ once: true }}
-              className="animate_top w-full md:w-2/5 md:p-7.5 lg:w-[26%] xl:pt-15"
+              className="animate_top md:p-7.5 xl:pt-15 w-full md:w-2/5 lg:w-[26%]"
             >
-              <h2 className="mb-12.5 text-3xl font-semibold text-black dark:text-white xl:text-sectiontitle2">
-                Find us
+              <h2 className="mb-12.5 xl:text-sectiontitle2 text-3xl font-semibold text-black dark:text-white">
+                Encontre-nos
               </h2>
 
               <div className="5 mb-7">
-                <h3 className="mb-4 text-metatitle3 font-medium text-black dark:text-white">
-                  Our Loaction
+                <h3 className="text-metatitle3 mb-4 font-medium text-black dark:text-white">
+                  Localização
                 </h3>
-                <p>290 Maryam Springs 260, Courbevoie, Paris, France</p>
+                <p>Luanda, Maianga</p>
               </div>
               <div className="5 mb-7">
-                <h3 className="mb-4 text-metatitle3 font-medium text-black dark:text-white">
-                  Email Address
+                <h3 className="text-metatitle3 mb-4 font-medium text-black dark:text-white">
+                  E-mail
                 </h3>
                 <p>
-                  <a href="#">yourmail@domainname.com</a>
+                  <a href="mailto:geral@redeveloper.ao">geral@redeveloper.ao</a>
                 </p>
               </div>
               <div>
-                <h4 className="mb-4 text-metatitle3 font-medium text-black dark:text-white">
-                  Phone Number
+                <h4 className="text-metatitle3 mb-4 font-medium text-black dark:text-white">
+                  Telefone
                 </h4>
                 <p>
-                  <a href="#">+009 42334 6343 843</a>
+                  <a href="tel:+244925423743">+244 925 423 743</a>
                 </p>
               </div>
             </motion.div>

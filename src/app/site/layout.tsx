@@ -3,7 +3,7 @@
 
 import { ThemeProvider } from "next-themes";
 import { Inter } from "next/font/google";
-//import "../../style/globals.css";
+ 
 import Lines from "./components/Lines";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -19,7 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`dark:bg-black ${inter.className}`}>
+      <body className={`dark:bg-black ${inter.className} site`}>
         <ThemeProvider
           enableSystem={false}
           attribute="class"

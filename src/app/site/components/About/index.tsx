@@ -7,9 +7,9 @@ const About = () => {
   return (
     <>
       {/* <!-- ===== About Start ===== --> */}
-      <section className="overflow-hidden pb-20 lg:pb-25 xl:pb-30">
-        <div className="mx-auto max-w-c-1235 px-4 md:px-8 xl:px-0">
-          <div className="flex items-center gap-8 lg:gap-32.5">
+      <section className="lg:pb-25 xl:pb-30 overflow-hidden pb-20">
+        <div className="max-w-c-1235 mx-auto px-4 md:px-8 xl:px-0">
+          <div className="lg:gap-32.5 flex items-center gap-8">
             <motion.div
               variants={{
                 hidden: {
@@ -60,46 +60,55 @@ const About = () => {
               className="animate_right md:w-1/2"
             >
               <span className="font-medium uppercase text-black dark:text-white">
-                <span className="mb-4 mr-4 inline-flex rounded-full bg-meta px-4.5 py-1 text-metatitle uppercase text-white ">
-                  New
+                <span className="bg-meta px-4.5 text-metatitle mb-4 mr-4 inline-flex rounded-full py-1 uppercase text-white">
+                  Novo
                 </span>{" "}
-                SaaS Boilerplate for Next.js
+                Plataforma de Helpdesk
               </span>
-              <h2 className="relative mb-6 text-3xl font-bold text-black dark:text-white xl:text-hero">
-                A Complete Solution for
-                <span className="relative inline-block before:absolute before:bottom-2.5 before:left-0 before:-z-1 before:h-3 before:w-full before:bg-titlebg dark:before:bg-titlebgdark">
-                  SaaS Startup
+              <h2 className="xl:text-hero flex flex-col relative mb-6 text-3xl font-bold text-black dark:text-white">
+                <div className="flex mb-6">Uma Solução</div>
+                <div className="flex mb-6">Completa para</div>
+                <span className="before:-z-1 mb-6 before:bg-titlebg dark:before:bg-titlebgdark relative mt-3 inline-block flex before:absolute before:bottom-2.5 before:left-0 before:h-3 before:w-full">
+                  Atendimento ao 
                 </span>
+                <span>Cliente</span>
               </h2>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut
-                ultricies lacus non fermentum ultrices. Fusce consectetur le.
+                Nossa plataforma foi desenvolvida para simplificar e otimizar o
+                atendimento ao cliente, oferecendo ferramentas poderosas para
+                gerenciar chamados, métricas e colaboração em equipe.
               </p>
 
               <div className="mt-7.5 flex items-center gap-5">
-                <div className="flex h-15 w-15 items-center justify-center rounded-[50%] border border-stroke dark:border-strokedark dark:bg-blacksection">
+                <div className="h-15 w-15 border-stroke dark:border-strokedark dark:bg-blacksection flex items-center justify-center rounded-[50%] border">
                   <p className="text-metatitle2 font-semibold text-black dark:text-white">
                     01
                   </p>
                 </div>
                 <div className="w-3/4">
-                  <h3 className="mb-0.5 text-metatitle2 text-black dark:text-white">
-                    React 18, Next.js 13 and TypeScript
+                  <h3 className="text-metatitle2 mb-0.5 text-black dark:text-white">
+                    Centralização de Chamados
                   </h3>
-                  <p>Ut ultricies lacus non fermentum ultrices.</p>
+                  <p>
+                    Gerencie todos os tickets em um único lugar, com histórico
+                    completo e acompanhamento em tempo real.
+                  </p>
                 </div>
               </div>
               <div className="mt-7.5 flex items-center gap-5">
-                <div className="flex h-15 w-15 items-center justify-center rounded-[50%] border border-stroke dark:border-strokedark dark:bg-blacksection">
+                <div className="h-15 w-15 border-stroke dark:border-strokedark dark:bg-blacksection flex items-center justify-center rounded-[50%] border">
                   <p className="text-metatitle2 font-semibold text-black dark:text-white">
                     02
                   </p>
                 </div>
                 <div className="w-3/4">
-                  <h3 className="mb-0.5 text-metatitle2 text-black dark:text-white">
-                    Fully Customizable
+                  <h3 className="text-metatitle2 mb-0.5 text-black dark:text-white">
+                    Relatórios Detalhados
                   </h3>
-                  <p>consectetur adipiscing elit fermentum ultricies.</p>
+                  <p>
+                    Acesse métricas de desempenho e satisfação do cliente para
+                    tomar decisões baseadas em dados.
+                  </p>
                 </div>
               </div>
             </motion.div>
@@ -110,8 +119,8 @@ const About = () => {
 
       {/* <!-- ===== About Two Start ===== --> */}
       <section>
-        <div className="mx-auto max-w-c-1235 overflow-hidden px-4 md:px-8 2xl:px-0">
-          <div className="flex items-center gap-8 lg:gap-32.5">
+        <div className="max-w-c-1235 mx-auto overflow-hidden px-4 md:px-8 2xl:px-0">
+          <div className="lg:gap-32.5 flex items-center gap-8">
             <motion.div
               variants={{
                 hidden: {
@@ -130,26 +139,27 @@ const About = () => {
               viewport={{ once: true }}
               className="animate_left md:w-1/2"
             >
-              <h4 className="font-medium uppercase text-black dark:text-white">
-                Launch Your SaaS Fast
+              <h4 className="font-medium mb-3 uppercase text-black dark:text-white">
+                Integrações Poderosas
               </h4>
-              <h2 className="relative mb-6 text-3xl font-bold text-black dark:text-white xl:text-hero">
-                Packed with All Essential {"   "}
-                <span className="relative inline-block before:absolute before:bottom-2.5 before:left-0 before:-z-1 before:h-3 before:w-full before:bg-titlebg2 dark:before:bg-titlebgdark">
-                  Integrations
+              <h2 className="xl:text-hero relative mb-6 text-3xl font-bold text-black dark:text-white">
+                <span className="mb-6 flex">Conecte-se com</span> {"   "}
+                <span className="before:-z-1 before:bg-titlebg2 dark:before:bg-titlebgdark relative inline-block before:absolute before:bottom-2.5 before:left-0 before:h-3 before:w-full">
+                  Seus Canais
                 </span>
               </h2>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut
-                ultricies lacus non fermentum ultrices. Fusce consectetur le.
+                Nossa plataforma suporta integração com e-mail, chat, redes
+                sociais e outros canais de comunicação, centralizando tudo em um
+                único painel.
               </p>
               <div>
                 <a
                   href="#"
-                  className="group mt-7.5 inline-flex items-center gap-2.5 text-black hover:text-primary dark:text-white dark:hover:text-primary"
+                  className="mt-7.5 group inline-flex items-center gap-2.5 text-black hover:text-primary dark:text-white dark:hover:text-primary"
                 >
                   <span className="duration-300 group-hover:pr-2">
-                    Know More
+                    Saiba Mais
                   </span>
                   <svg
                     width="14"

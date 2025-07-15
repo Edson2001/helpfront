@@ -1,38 +1,21 @@
-import image1 from "../../../../../public/images/user/user-01.png";
-import image2 from "../../../../../public/images/user/user-02.png";
- 
+import image1 from "../../../../../public/images/marios.png";
+import image2 from "../../../../../public/images/recik.png";
 
 export const testimonialData: any[] = [
   {
     id: 1,
-    name: "Devid Smith",
-    designation: "Founter @democompany",
+    name: "Marios Peres",
+    designation: "CEO @TechSolutions",
     image: image1,
     content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris hendrerit, ligula sit amet cursus tincidunt, lorem sem elementum nisi, convallis fringilla ante nibh non urna.",
+      "A plataforma de helpdesk revolucionou nosso atendimento ao cliente. Reduzimos o tempo de resposta em 50% e a satisfação dos clientes subiu para 95%. A integração com múltiplos canais é incrível!",
   },
   {
     id: 2,
-    name: "Jhon Abraham",
-    designation: "Founter @democompany",
+    name: "Recik Da Cunha",
+    designation: "Gerente de Suporte @InovaCorp",
     image: image2,
     content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris hendrerit, ligula sit amet cursus tincidunt, lorem sem elementum nisi, convallis fringilla ante nibh non urna.",
-  },
-  {
-    id: 3,
-    name: "Devid Smith",
-    designation: "Founter @democompany",
-    image: image1,
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris hendrerit, ligula sit amet cursus tincidunt, lorem sem elementum nisi, convallis fringilla ante nibh non urna.",
-  },
-  {
-    id: 4,
-    name: "Jhon Abraham",
-    designation: "Founter @democompany",
-    image: image2,
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris hendrerit, ligula sit amet cursus tincidunt, lorem sem elementum nisi, convallis fringilla ante nibh non urna.",
+      "Desde que implementamos essa solução, nossa equipe ganhou eficiência e os clientes elogiam a organização dos tickets. A interface intuitiva e os relatórios detalhados são diferenciais essenciais.",
   },
 ];
