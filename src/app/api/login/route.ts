@@ -22,6 +22,7 @@ export async function POST(req: Request) {
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
       path: "/",
+      domain: ".webfacil.site",
       maxAge: 60 * 60 * 24 * 7,
     });
 
@@ -33,6 +34,7 @@ export async function POST(req: Request) {
         secure: process.env.NODE_ENV === "production",
         sameSite: "lax",
         path: "/",
+        domain: ".webfacil.site",
         maxAge: 60 * 60 * 24 * 7,
       },
     );
