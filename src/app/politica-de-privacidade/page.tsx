@@ -1,5 +1,6 @@
 import { Metadata } from "next";
-import SectionHeader from "../site/components/Common/SectionHeader";
+import SectionHeader from "../home/components/Common/SectionHeader";
+ 
 
 export const metadata: Metadata = {
   title: "Política de Privacidade - RedHelp",
