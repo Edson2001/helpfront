@@ -87,10 +87,10 @@ const Header = () => {
 
         {/* Menu de Navegação */}
         <div
-          className={`invisible h-0 w-full items-center justify-between xl:visible xl:flex xl:h-auto xl:w-full ${
-            navigationOpen &&
-            "navbar visible! p-7.5 shadow-solid-5 dark:bg-blacksection mt-4 h-auto max-h-[400px] rounded-md bg-white xl:h-auto xl:p-0 xl:shadow-none xl:dark:bg-transparent"
-          }`}
+          className={`${navigationOpen ? "visible h-auto bg-white" : "invisible h-0"} w-full items-center justify-between transition-all duration-300 xl:visible xl:flex xl:h-auto xl:w-full`}
+          style={{
+            backgroundColor: navigationOpen ? "white" : "transparent",
+          }}
         >
           <nav>
             <ul className="flex flex-col gap-5 xl:flex-row xl:items-center xl:gap-10">
