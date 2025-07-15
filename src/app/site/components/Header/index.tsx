@@ -28,7 +28,7 @@ const Header = () => {
 
   return (
     <header
-      className={`z-99999 fixed left-0 top-0 w-full py-7 ${
+      className={`fixed left-0 top-0 z-[999999] w-full py-7 ${
         stickyMenu
           ? "py-4! bg-white shadow-sm transition duration-100 dark:bg-black"
           : ""
@@ -36,8 +36,9 @@ const Header = () => {
     >
       <div className="max-w-c-1390 relative mx-auto items-center justify-between px-4 md:px-8 xl:flex 2xl:px-0">
         <div className="flex w-full items-center justify-between xl:w-1/4">
-          <a href="/">
-            <Image
+          <h2 className="font-bold">
+            <Link href="/">
+              {/* <Image
               src="/images/logo/logo-dark.svg"
               alt="logo"
               width={119.03}
@@ -50,16 +51,37 @@ const Header = () => {
               width={119.03}
               height={30}
               className="w-full dark:hidden"
-            />
-          </a>
+            /> */}
+              RedHelp
+            </Link>
+          </h2>
 
           {/* Botão do Menu Mobile */}
           <button
             aria-label="hamburger Toggler"
-            className="block xl:hidden"
-            onClick={() => setNavigationOpen(!navigationOpen)}
+            className="z-50 block rounded-md bg-gray-200 p-2 xl:hidden" // Estilo temporário para debug
+            onClick={() => {
+              console.log("Toggle menu:", !navigationOpen);
+              setNavigationOpen(!navigationOpen);
+            }}
           >
-            {/* Ícone do menu */}
+            <span className="relative block h-6 w-6 cursor-pointer">
+              <span
+                className={`absolute right-0 block h-0.5 w-full rounded-sm bg-black transition-all duration-300 ease-in-out dark:bg-white ${
+                  navigationOpen ? "top-2 rotate-45" : "top-0"
+                }`}
+              ></span>
+              <span
+                className={`absolute right-0 block h-0.5 w-full rounded-sm bg-black transition-all duration-300 ease-in-out dark:bg-white ${
+                  navigationOpen ? "opacity-0" : "top-2"
+                }`}
+              ></span>
+              <span
+                className={`absolute right-0 block h-0.5 w-full rounded-sm bg-black transition-all duration-300 ease-in-out dark:bg-white ${
+                  navigationOpen ? "top-2 -rotate-45" : "top-4"
+                }`}
+              ></span>
+            </span>
           </button>
         </div>
 
