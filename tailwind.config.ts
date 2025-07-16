@@ -36,7 +36,7 @@ const config = {
       },
       colors: {
         // ÚNICO bloco colors permitido
-        border: "hsl(var(--color-stroke))",
+        border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",

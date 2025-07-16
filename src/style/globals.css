@@ -79,7 +79,7 @@
 
     --color-current: currentColor;
     --color-transparent: transparent;
-    --color-stroke: #eeeeee;
+    /* --color-stroke: #eeeeee; */
     --color-strokedark: #2d2f40;
     --color-hoverdark: #252a42;
     --color-titlebg: #adfff8;
@@ -200,7 +200,7 @@
 
     --color-current: currentColor;
     --color-transparent: transparent;
-    --color-stroke: #eeeeee;
+    /* --color-stroke: #eeeeee; */
     --color-strokedark: #2d2f40;
     --color-hoverdark: #252a42;
     --color-titlebg: #adfff8;
