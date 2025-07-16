@@ -13,10 +13,8 @@ import { WidgetConfigForm } from "./components/WidgetConfigForm";
 export default function ConfigPage() {
   return (
     <div className="">
-      {/* Menu lateral e conteúdo principal em um único Tabs com grid */}
       <Tabs defaultValue="geral" className="w-full p-3">
-        {/* Abas na parte superior */}
-        <TabsList className="flex flex-row gap-2   bg-transparent">
+        <TabsList className="flex flex-row gap-2 bg-transparent">
           <TabsTrigger
             value="geral"
             className="whitespace-nowrap px-4 py-2 text-sm font-medium data-[state=active]:bg-accent data-[state=active]:text-accent-foreground"
@@ -37,7 +35,6 @@ export default function ConfigPage() {
           </TabsTrigger>
         </TabsList>
 
-        {/* Conteúdo abaixo das abas */}
         <div className="p-4">
           <TabsContent value="geral">
             <OrganizationForm />
