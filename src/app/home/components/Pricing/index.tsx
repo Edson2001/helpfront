@@ -8,8 +8,8 @@ const Pricing = () => {
   const [isAnnual, setIsAnnual] = useState(false);
 
   return (
-    <section className="pt-15 lg:pb-25 xl:pb-30 overflow-hidden pb-20">
-      <div className="max-w-c-1315 mx-auto px-4 md:px-8 xl:px-0">
+    <section className="overflow-hidden pb-20 pt-15 lg:pb-25 xl:pb-30">
+      <div className="mx-auto max-w-c-1315 px-4 md:px-8 xl:px-0">
         <div className="animate_top mx-auto text-center">
           <SectionHeader
             headerInfo={{
@@ -45,8 +45,8 @@ const Pricing = () => {
         </div>
       </div>
 
-      <div className="mt-15 relative mx-auto max-w-[1207px] px-4 md:px-8 xl:mt-20 xl:px-0">
-        <div className="-bottom-15 -z-1 absolute h-full w-full">
+      <div className="relative mx-auto mt-15 max-w-[1207px] px-4 md:px-8 xl:mt-20 xl:px-0">
+        <div className="absolute -bottom-15 -z-1 h-full w-full">
           <Image
             fill
             src="./images/shape/shape-dotted-light.svg"
@@ -68,7 +68,11 @@ const Pricing = () => {
           {/* Básico */}
           <PricingCard
             title="Básico"
-            price={isAnnual ? `${(4250 * 12).toLocaleString("pt-AO", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Kz/ano` : "4.250 Kz/mês"}
+            price={
+              isAnnual
+                ? `${(4250 * 12).toLocaleString("pt-AO", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Kz/ano`
+                : "4.250 Kz/mês"
+            }
             description="Para equipes que precisam de recursos essenciais"
             features={[
               "Até 3 agentes",
@@ -82,7 +86,11 @@ const Pricing = () => {
           {/* Profissional */}
           <PricingCard
             title="Profissional"
-            price={isAnnual ? `${(8500 * 12).toLocaleString("pt-AO", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Kz/ano` : "8.500 Kz/mês"}
+            price={
+              isAnnual
+                ? `${(8500 * 12).toLocaleString("pt-AO", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Kz/ano`
+                : "8.500 Kz/mês"
+            }
             description="Para equipes que exigem mais produtividade"
             features={[
               "Agentes ilimitados",
@@ -125,6 +133,8 @@ export const PricingCard = ({
   features,
   buttonText,
   highlight = false,
+  onButtonClick,
+  disabled = false,
 }: {
   title: string;
   price: string;
@@ -132,32 +142,34 @@ export const PricingCard = ({
   features: string[];
   buttonText: string;
   highlight?: boolean;
+  onButtonClick?: () => void;
+  disabled?: boolean;
 }) => (
-  <div className="animate_top border-stroke p-7.5 shadow-solid-10 dark:border-strokedark dark:bg-blacksection xl:p-12.5 group relative rounded-lg border bg-white dark:shadow-none md:w-[45%] lg:w-1/3">
+  <div className="animate_top group relative rounded-lg border border-stroke bg-white p-7.5 shadow-solid-10 dark:border-strokedark dark:bg-blacksection dark:shadow-none md:w-[45%] lg:w-1/3 xl:p-12.5">
     {highlight && (
-      <div className="top-7.5 px-4.5 text-metatitle absolute -right-3.5 -rotate-90 rounded-bl-full rounded-tl-full bg-primary py-1.5 font-medium uppercase text-white">
+      <div className="text-metatitle absolute -right-3.5 top-7.5 -rotate-90 rounded-bl-full rounded-tl-full bg-primary px-4.5 py-1.5 font-medium uppercase text-white">
         popular
       </div>
     )}
 
-    <h3 className="mb-7.5 xl:text-sectiontitle3 text-3xl font-bold text-black dark:text-white">
+    <h3 className="mb-7.5 text-3xl font-bold text-black dark:text-white xl:text-sectiontitle3">
       {price}
-     {/*  <span className="text-regular text-waterloo dark:text-manatee">
+      {/*  <span className="text-regular text-waterloo dark:text-manatee">
         {" "}
         /mês
       </span> */}
     </h3>
-    <h4 className="text-para2 mb-2.5 font-medium text-black dark:text-white">
+    <h4 className="mb-2.5 text-para2 font-medium text-black dark:text-white">
       {title}
     </h4>
     <p>{description}</p>
 
-    <div className="border-stroke pb-12.5 dark:border-strokedark mt-9 border-t pt-9">
+    <div className="mt-9 border-t border-stroke pb-12.5 pt-9 dark:border-strokedark">
       <ul>
         {features.map((item, index) => (
           <li
             key={index}
-            className="dark:text-manatee mb-4 text-black last:mb-0"
+            className="mb-4 text-black last:mb-0 dark:text-manatee"
           >
             {item}
           </li>
@@ -165,7 +177,13 @@ export const PricingCard = ({
       </ul>
     </div>
 
-    <button className="group/btn inline-flex items-center gap-2.5 font-medium text-primary transition-all duration-300 dark:text-white dark:hover:text-primary">
+    <button
+      onClick={onButtonClick}
+      disabled={disabled}
+      className={`group/btn inline-flex items-center gap-2.5 font-medium text-primary transition-all duration-300 dark:text-white dark:hover:text-primary ${
+        disabled ? "cursor-not-allowed opacity-50" : ""
+      }`}
+    >
       <span className="duration-300 group-hover/btn:pr-2">{buttonText}</span>
       <svg
         width="14"
@@ -226,7 +244,7 @@ const AddOns = ({ isAnnual }: { isAnnual: boolean }) => {
         {addons.map((addon, index) => (
           <div
             key={index}
-            className="border-stroke dark:border-strokedark dark:bg-blacksection rounded-2xl border bg-white p-6 shadow-md transition-shadow hover:shadow-lg"
+            className="rounded-2xl border border-stroke bg-white p-6 shadow-md transition-shadow hover:shadow-lg dark:border-strokedark dark:bg-blacksection"
           >
             <h4 className="mb-1 text-lg font-semibold text-black dark:text-white">
               {addon.title}

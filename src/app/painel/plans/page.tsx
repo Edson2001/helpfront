@@ -1,51 +1,46 @@
-"use client"
+"use client";
+
 import React, { useState } from "react";
 import { PricingCard } from "@/app/home/components/Pricing";
-// Importa o componente principal de Pricing
-import AddOns from "@/app/home/components/Pricing/AddOns";
-
-// Importa o componente de AddOns
-
-interface Plan {
-  title: string;
-  monthlyPrice: number;
-  annualPrice: number;
-  description: string;
-  features: string[];
-  buttonText: string;
-  highlight?: boolean;
-}
+import { useGeneratePayment } from "./hooks/useGeneratePayment";
+import { usePlans } from "./hooks/usePlans";
 
 export default function PlansPage() {
   const [isAnnual, setIsAnnual] = useState(false);
+  const { data: plans, isLoading, error } = usePlans();
+  const { mutate: generatePayment, isPending } = useGeneratePayment();
 
-  const plans: Plan[] = [
-    {
-      title: "Gratuito",
-      monthlyPrice: 0,
-      annualPrice: 0,
-      description: "Ideal para pequenas equipes começando com atendimento",
-      features: ["1 agente", "Até 3 tickets ativos", "Sem histórico"],
-      buttonText: "Começar Agora",
-    },
-    {
-      title: "Básico",
-      monthlyPrice: 4250,
-      annualPrice: 4250 * 12 * 0.8, // 20% de desconto anual
-      description: "Para equipes que precisam de recursos essenciais",
-      features: ["Até 3 agentes", "Histórico completo", "Relatórios simples"],
-      highlight: true,
-      buttonText: "Assinar Plano",
-    },
-    {
-      title: "Profissional",
-      monthlyPrice: 8500,
-      annualPrice: 8500 * 12 * 0.8, // 20% de desconto anual
-      description: "Para equipes que exigem mais produtividade",
-      features: ["Agentes ilimitados", "SLA e automações", "Respostas rápidas"],
-      buttonText: "Assinar Plano",
-    },
-  ];
+  const handleSubscribe = (planId: string) => {
+    // Simulando dados do cliente (substitua pelos dados reais do usuário)
+    const customerData = {
+      firstName: "Nome", // Substitua pelo nome do usuário logado
+      lastName: "Sobrenome", // Substitua pelo sobrenome do usuário logado
+      email: "email@exemplo.com", // Substitua pelo email do usuário logado
+      phone: "912345678", // Substitua pelo telefone do usuário logado
+    };
+
+    generatePayment(
+      { planId, customerData, isAnnual },
+      {
+        onSuccess: (data) => {
+          console.log(data?.data?.redirect_url, "/////////");
+          // Redirecionar para a URL de pagamento
+          window.location.href = data?.data?.redirect_url;
+        },
+        onError: (error) => {
+          alert(`Erro ao gerar pagamento: ${error.message}`);
+        },
+      },
+    );
+  };
+
+  if (isLoading) {
+    return <div>Carregando planos...</div>;
+  }
+
+  if (error) {
+    return <div>Erro ao carregar planos: {error.message}</div>;
+  }
 
   return (
     <div className="p-4">
@@ -78,10 +73,10 @@ export default function PlansPage() {
       </div>
 
       {/* Lista de planos */}
-      <div className="flex flex-wrap justify-center">
-        {plans.map((plan, index) => (
+      <div className="flex flex-wrap justify-center gap-6">
+        {plans?.map((plan) => (
           <PricingCard
-            key={index}
+            key={plan.id}
             title={plan.title}
             price={
               isAnnual
@@ -92,6 +87,8 @@ export default function PlansPage() {
             features={plan.features}
             buttonText={plan.buttonText}
             highlight={plan.highlight}
+            onButtonClick={() => handleSubscribe(plan.id)}
+            disabled={isPending}
           />
         ))}
       </div>
