@@ -118,7 +118,7 @@ const Pricing = () => {
   );
 };
 
-const PricingCard = ({
+export const PricingCard = ({
   title,
   price,
   description,
