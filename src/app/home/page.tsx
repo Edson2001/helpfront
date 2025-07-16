@@ -12,6 +12,7 @@ import Hero from "./components/Hero";
 import Integration from "./components/Integration";
 import Pricing from "./components/Pricing";
 import Testimonial from "./components/Testimonial";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "RedHelp - Solução Completa de Helpdesk | Gerenciamento de Chamados",
@@ -67,6 +68,7 @@ export default function Home() {
       <Testimonial />
       <Pricing />
       <Contact />
+      <Script src="http://localhost:3000/widget.js"  data-slug="geral"/>
     </main>
   );
 }
