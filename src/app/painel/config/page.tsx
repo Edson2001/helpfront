@@ -8,13 +8,16 @@ import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { EmailSettings } from "./components/EmailSettings";
 import { OrganizationForm } from "./components/OrganizationForm";
+import { SlackSettings } from "./components/SlackSettings";
+import { TeamsSettings } from "./components/TeamsSettings";
+import { TelegramSettings } from "./components/TelegramSettings";
 import { WidgetConfigForm } from "./components/WidgetConfigForm";
 
 export default function ConfigPage() {
   return (
     <div className="">
       <Tabs defaultValue="geral" className="w-full p-3">
-        <TabsList className="flex flex-row gap-2 bg-transparent">
+        <TabsList className="flex flex-row gap-2 border-b bg-transparent">
           <TabsTrigger
             value="geral"
             className="whitespace-nowrap px-4 py-2 text-sm font-medium data-[state=active]:bg-accent data-[state=active]:text-accent-foreground"
@@ -33,6 +36,25 @@ export default function ConfigPage() {
           >
             Widget
           </TabsTrigger>
+          <TabsTrigger
+            value="telegram"
+            className="whitespace-nowrap px-4 py-2 text-sm font-medium data-[state=active]:bg-accent data-[state=active]:text-accent-foreground"
+          >
+            Telegram
+          </TabsTrigger>
+          <TabsTrigger
+            value="slack"
+            className="whitespace-nowrap px-4 py-2 text-sm font-medium data-[state=active]:bg-accent data-[state=active]:text-accent-foreground"
+          >
+            Slack
+          </TabsTrigger>
+
+          <TabsTrigger
+            value="teams"
+            className="whitespace-nowrap px-4 py-2 text-sm font-medium data-[state=active]:bg-accent data-[state=active]:text-accent-foreground"
+          >
+            Teams
+          </TabsTrigger>
         </TabsList>
 
         <div className="p-4">
@@ -44,6 +66,15 @@ export default function ConfigPage() {
           </TabsContent>
           <TabsContent value="widget">
             <WidgetConfigForm />
+          </TabsContent>
+          <TabsContent value="telegram">
+            <TelegramSettings />
+          </TabsContent>
+          <TabsContent value="slack">
+            <SlackSettings />
+          </TabsContent>
+          <TabsContent value="teams">
+            <TeamsSettings />
           </TabsContent>
         </div>
       </Tabs>
