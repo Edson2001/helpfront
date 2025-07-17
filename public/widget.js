@@ -165,8 +165,8 @@
         };
 
         try {
-            //const res = await fetch(`http://localhost:3006/tickets/external?orgSlug=${slug}`, {
-                const res = await fetch(`http://localhost:3006/tickets/external?orgSlug=${slug}`, {
+            //const res = await fetch(`https://helpback.webfacil.site/tickets/external?orgSlug=${slug}`, {
+                const res = await fetch(`https://helpback.webfacil.site/tickets/external?orgSlug=${slug}`, {
             method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(data),
@@ -236,7 +236,7 @@
             };
 
             try {
-                const res = await fetch(`http://localhost:3006/tickets/external?orgSlug=${slug}`, {
+                const res = await fetch(`https://helpback.webfacil.site/tickets/external?orgSlug=${slug}`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(data),
