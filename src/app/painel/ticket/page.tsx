@@ -4,8 +4,9 @@ import { FileText, Ticket } from "lucide-react";
 import { Check, Loader2 } from "lucide-react";
 import { AlertCircle } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { io } from "socket.io-client";
 import * as XLSX from "xlsx";
 import { useQueryClient } from "@tanstack/react-query";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
@@ -31,7 +32,7 @@ import {
 import { useUserStore } from "@/stores/userStore";
 import { useAssignTicket } from "../hooks/useAssignTicket";
 import { useList } from "../hooks/useList";
-import { useUpdateTicket } from "../hooks/useUpdateTicket";
+ 
 import { useUpdateTicketStatus } from "../hooks/useUpdateTicketStatus";
 import { useUsers } from "../users/hooks/getData";
 import ModalCreateTicket from "./components/ModalCreateTicket";
@@ -64,8 +65,30 @@ const priorityColors: Record<string, string> = {
   URGENT: "bg-red-100 text-red-800",
 };
 
+// Função para buscar o token da API
+async function fetchToken(): Promise<string | null> {
+  try {
+    const response = await fetch("/api/user");
+    if (!response.ok) {
+      throw new Error("Erro ao buscar token");
+    }
+    const data = await response.json();
+    return data.userCookieToken || null;
+  } catch (error) {
+    console.error("Erro ao buscar token:", error);
+    return null;
+  }
+}
+
+// Adicione no topo do arquivo (após os imports)
+const playNewTicketSound = () => {
+  const audio = new Audio("/public/notification.mp3"); // Substitua pelo caminho do seu arquivo de som
+  audio.play().catch((e) => console.error("Erro ao reproduzir som:", e));
+};
+
 export default function TicketPage() {
-  const { data: tickets, isLoading, error } = useList();
+  const [socket, setSocket] = useState<any>(null);
+  const { data: tickets, isLoading, error, refetch } = useList();
   const useListUser = useUsers();
   //console.log(useListUser?.data, "useListUser")
   const [statusFilter, setStatusFilter] = useState<string>("ALL");
@@ -82,11 +105,68 @@ export default function TicketPage() {
   const agents = useListUser?.data?.filter(
     (item: any) => item?.role == "AGENT",
   );
-
-  const client = useQueryClient();
+  const [token, setToken] = useState<string | null>(null);
   const { mutate, isPending } = useAssignTicket();
   const { mutate: updateStatus, isPending: isUpdatingStatus } =
     useUpdateTicketStatus();
+  const client = useQueryClient();
+
+  useEffect(() => {
+    // Buscar o token da API
+    const getToken = async () => {
+      const userToken = await fetchToken();
+      setToken(userToken);
+    };
+    getToken();
+  }, []);
+
+  useEffect(() => {
+    if (!token) return; // Não prosseguir sem token
+
+    const socketInstance = io(
+      process.env.NEXT_PUBLIC_BACK_URL || "http://localhost:3006",
+    );
+    setSocket(socketInstance);
+
+    socketInstance.emit("listTickets", { token });
+
+    socketInstance.on("ticketsList", (tickets) => {
+      console.log(tickets, "ticketsticketstickets");
+      setLocalTickets(tickets);
+    });
+
+    // Adicione este listener para novos tickets externos
+    socketInstance.on("newExternalTicket", (data) => {
+      console.log("Novo ticket recebido:", data?.ticket);
+
+      // Notificação de voz
+      if ("speechSynthesis" in window) {
+        const utterance = new SpeechSynthesisUtterance(
+          `Novo ticket recebido: ${data?.ticket?.title}`,
+        );
+        utterance.lang = "pt-PT";
+        speechSynthesis.speak(utterance);
+      }
+
+      // Atualização da lista
+      setLocalTickets((prev) => {
+        const newList = [...(prev || [])];
+        if (data?.ticket && !newList.some((t) => t.id === data.ticket.id)) {
+          newList.unshift(data.ticket);
+          playNewTicketSound(); // Toca o som
+        }
+        return newList;
+      });
+    });
+
+    socketInstance.on("error", (error) => {
+      toast.error("Erro no WebSocket");
+    });
+
+    return () => {
+      socketInstance.disconnect();
+    };
+  }, [token]); // Dependência do token
 
   const handleAssignUser = (userId: string, ticketId: string) => {
     if (!userId || !ticketId) {
@@ -454,7 +534,6 @@ export default function TicketPage() {
               <TableHead className="w-1/4">Título</TableHead>
               <TableHead>Status</TableHead>
               <TableHead>Prioridade</TableHead>
-              
               <TableHead>Criado em</TableHead>
               <TableHead>Email</TableHead>
               <TableHead>Criado por</TableHead>
@@ -487,8 +566,12 @@ export default function TicketPage() {
                 <TableCell>
                   {new Date(ticket.createdAt).toLocaleString("pt-PT")}
                 </TableCell>
-                <TableCell>{ticket.createdBy?.email ?? ticket?.externalEmail}</TableCell>
-                <TableCell>{ticket.createdBy?.name ?? ticket?.externalName}</TableCell>
+                <TableCell>
+                  {ticket.createdBy?.email ?? ticket?.externalEmail}
+                </TableCell>
+                <TableCell>
+                  {ticket.createdBy?.name ?? ticket?.externalName}
+                </TableCell>
                 <TableCell>
                   {user?.role == "ADMIN" ? (
                     <Select
@@ -576,28 +659,30 @@ export default function TicketPage() {
                         </svg>
                       </Button>
                     </Link>
-                    {ticket?.createdBy?.id == user?.id && <Button
-                      variant="outline"
-                      size="icon"
-                      className="ml-2"
-                      title="Editar ticket"
-                      onClick={() => handleEdit(ticket)}
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-4 w-4"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth={2}
+                    {ticket?.createdBy?.id == user?.id && (
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        className="ml-2"
+                        title="Editar ticket"
+                        onClick={() => handleEdit(ticket)}
                       >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
-                        />
-                      </svg>
-                    </Button>}
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-4 w-4"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          strokeWidth={2}
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                          />
+                        </svg>
+                      </Button>
+                    )}
                   </div>
                 </TableCell>
               </TableRow>

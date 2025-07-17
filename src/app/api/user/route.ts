@@ -6,6 +6,7 @@ export const runtime = "edge";
 export async function GET(request: NextRequest) {
   try {
     const userCookie = request.cookies.get("user")?.value;
+    const userCookieToken = request.cookies.get("token")?.value;
 
     if (!userCookie) {
       return NextResponse.json(
@@ -17,7 +18,7 @@ export async function GET(request: NextRequest) {
     const userData = JSON.parse(userCookie);
 
     return NextResponse.json(
-      { success: true, user: userData },
+      { success: true, user: userData, userCookieToken },
       { status: 200 },
     );
   } catch (error) {
