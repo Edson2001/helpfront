@@ -5,12 +5,7 @@ import api from "@/services";
 
 interface GeneratePaymentParams {
   planId: string;
-  customerData: {
-    firstName: string;
-    lastName: string;
-    email: string;
-    phone: string;
-  };
+  customerData: any;
   isAnnual: boolean;
 }
 

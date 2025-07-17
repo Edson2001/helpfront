@@ -4,34 +4,54 @@ import React, { useState } from "react";
 import { PricingCard } from "@/app/home/components/Pricing";
 import { useGeneratePayment } from "./hooks/useGeneratePayment";
 import { usePlans } from "./hooks/usePlans";
+import { useUserStore } from "@/stores/userStore";
 
 export default function PlansPage() {
   const [isAnnual, setIsAnnual] = useState(false);
   const { data: plans, isLoading, error } = usePlans();
+
+  const {user} = useUserStore((state)=> state)
+  
   const { mutate: generatePayment, isPending } = useGeneratePayment();
 
-  const handleSubscribe = (planId: string) => {
-    // Simulando dados do cliente (substitua pelos dados reais do usuário)
-    const customerData = {
-      firstName: "Nome", // Substitua pelo nome do usuário logado
-      lastName: "Sobrenome", // Substitua pelo sobrenome do usuário logado
-      email: "email@exemplo.com", // Substitua pelo email do usuário logado
-      phone: "912345678", // Substitua pelo telefone do usuário logado
-    };
+  const handleSubscribe = async (planId: string) => {
+    try {
+      // Obter os dados do usuário logado
+     /*  const userResponse = await fetch("/api/user", {
+        method: "GET",
+        credentials: "include", // Inclui cookies na requisição
+      });
 
-    generatePayment(
-      { planId, customerData, isAnnual },
-      {
-        onSuccess: (data) => {
-          console.log(data?.data?.redirect_url, "/////////");
-          // Redirecionar para a URL de pagamento
-          window.location.href = data?.data?.redirect_url;
+      if (!userResponse.ok) {
+        throw new Error("Erro ao obter dados do usuário");
+      } */
+
+     // const { user } = await userResponse.json();
+      console.log(user, "LOLLLLL")
+      // Usar os dados do usuário para o pagamento
+      /* const customerData = {
+        firstName: user?.firstName || "Nome", // Substitua pelo campo correto
+        lastName: user?.lastName || "Sobrenome", // Substitua pelo campo correto
+        email: user?.email || "email@exemplo.com", // Substitua pelo campo correto
+        phone: user?.phone || "912345678", // Substitua pelo campo correto
+      };
+ */
+      generatePayment(
+        { planId, customerData: user, isAnnual },
+        {
+          onSuccess: (data) => {
+            console.log(data?.data?.redirect_url, "/////////");
+            window.location.href = data?.data?.redirect_url;
+          },
+          onError: (error) => {
+            alert(`Erro ao gerar pagamento: ${error.message}`);
+          },
         },
-        onError: (error) => {
-          alert(`Erro ao gerar pagamento: ${error.message}`);
-        },
-      },
-    );
+      );
+    } catch (error) {
+      console.error("Erro ao processar pagamento:", error);
+      alert("Erro ao processar pagamento. Tente novamente.");
+    }
   };
 
   if (isLoading) {
