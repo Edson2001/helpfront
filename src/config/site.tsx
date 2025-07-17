@@ -1,4 +1,4 @@
-import { Gauge, type LucideIcon, MessagesSquare, Users2 } from "lucide-react";
+import { Gauge, type LucideIcon, MessagesSquare, Users2, Settings, Wallet } from "lucide-react";
 
 export type SiteConfig = typeof siteConfig;
 export type Navigation = {
@@ -27,5 +27,15 @@ export const navigations: Navigation[] = [
     icon: Users2,
     name: "Utilizadores",
     href: "/painel/users",
+  },
+  {
+    icon: Settings,
+    name: "Configurações",
+    href: "/painel/config",
+  },
+  {
+    icon: Wallet,
+    name: "Planos",
+    href: "/painel/plans",
   },
 ];

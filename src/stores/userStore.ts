@@ -6,7 +6,6 @@ interface User {
   name: string;
   email: string;
   role: string;
-  // Adicione outros campos conforme necessário
 }
 
 interface UserStore {
@@ -26,10 +25,9 @@ export const useUserStore = create<UserStore>((set) => ({
     set({ loading: true, error: null });
     try {
       const response = await api.get("/users/find/data");
-      console.log(response?.data, "****---");
+
       set({ user: response.data, loading: false });
     } catch (err) {
-      console.log(err, "))))))))))))))");
       set({ error: "Failed to fetch user data", loading: false });
     }
   },
