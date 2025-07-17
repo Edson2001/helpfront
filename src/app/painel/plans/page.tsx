@@ -93,7 +93,7 @@ export default function PlansPage() {
       </div>
 
       {/* Lista de planos */}
-      <div className="flex flex-wrap justify-center gap-6">
+      <div className="flex flex-wrap justify-center">
         {plans?.map((plan) => (
           <PricingCard
             key={plan.id}
