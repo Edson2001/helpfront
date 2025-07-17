@@ -165,8 +165,9 @@
         };
 
         try {
-            const res = await fetch(`https://helpback.webfacil.site/tickets/external?orgSlug=${slug}`, {
-                method: "POST",
+            //const res = await fetch(`https://helpback.webfacil.site/tickets/external?orgSlug=${slug}`, {
+                const res = await fetch(`https://helpback.webfacil.site/tickets/external?orgSlug=${slug}`, {
+            method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(data),
             });
