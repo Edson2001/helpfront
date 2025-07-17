@@ -151,6 +151,42 @@ export default function TicketDetailPage({
     setNewComment("");
   }
 
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append("image", file);
+
+    try {
+      const res = await api.post("/tickets/upload", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      const imageUrl = res.data.url;
+      const comment = {
+        id: Date.now(),
+        content: imageUrl,
+        createdAt: new Date().toISOString(),
+        author: user?.id,
+        isImage: true,
+      };
+
+      socket.emit("addComment", {
+        ticketId: id,
+        content: imageUrl,
+        authorId: user?.id,
+        isImage: true,
+      });
+
+     // setComments((prev) => [...prev, comment]);
+    } catch (error) {
+      console.error("Erro ao fazer upload da imagem:", error);
+    }
+  };
+
   return (
     <section className="mx-auto max-w-6xl py-8">
       <div className="flex flex-col gap-8 lg:flex-row">
@@ -277,11 +313,19 @@ export default function TicketDetailPage({
                             )}
                           </div>
                           <div>
-                            <div
-                              className={`rounded-2xl border px-5 py-3 text-base shadow-md transition-all ${isMe ? "ml-2 bg-blue-500 text-white" : "mr-2 bg-white text-foreground"}`}
-                            >
-                              {comment.content}
-                            </div>
+                            {comment.isImage ? (
+                              <img
+                                src={comment.content}
+                                alt="Imagem enviada"
+                                className="max-h-64 rounded-2xl border shadow-md"
+                              />
+                            ) : (
+                              <div
+                                className={`rounded-2xl border px-5 py-3 text-base shadow-md transition-all ${isMe ? "ml-2 bg-blue-500 text-white" : "mr-2 bg-white text-foreground"}`}
+                              >
+                                {comment.content}
+                              </div>
+                            )}
                             <div
                               className={`mt-1 text-xs ${isMe ? "text-right" : "text-left"} text-muted-foreground`}
                             >
@@ -307,14 +351,38 @@ export default function TicketDetailPage({
               onSubmit={handleSendComment}
               className="flex gap-2 border-t bg-background/90 p-4 backdrop-blur supports-[backdrop-filter]:bg-background/60"
             >
-              <input
-                type="text"
-                className="flex-1 rounded-full border bg-white px-4 py-2 text-base shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
-                placeholder="Digite uma mensagem..."
-                value={newComment}
-                onChange={(e) => setNewComment(e.target.value)}
-                autoComplete="off"
-              />
+              <div className="flex flex-1 items-center gap-2">
+                <input
+                  type="text"
+                  className="flex-1 rounded-full border bg-white px-4 py-2 text-base shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  placeholder="Digite uma mensagem..."
+                  value={newComment}
+                  onChange={(e) => setNewComment(e.target.value)}
+                  autoComplete="off"
+                />
+                <label className="cursor-pointer rounded-full bg-gray-200 p-2 hover:bg-gray-300">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={handleImageUpload}
+                  />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5 text-gray-600"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                    />
+                  </svg>
+                </label>
+              </div>
               <button
                 type="submit"
                 className="inline-flex items-center gap-2 rounded-full bg-blue-500 px-5 py-2 text-base font-semibold text-white shadow transition hover:bg-blue-600"
