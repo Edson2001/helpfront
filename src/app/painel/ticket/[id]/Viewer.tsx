@@ -59,6 +59,7 @@ export default function TicketDetailPage({
   const [socket, setSocket] = useState<any>(null);
   const [comments, setComments] = useState<any[]>([]);
   const [newComment, setNewComment] = useState("");
+  const [isUploading, setIsUploading] = useState(false); // Novo estado para controlar o upload
   const chatEndRef = useRef<HTMLDivElement>(null);
   const currentUser = { id: "me", name: "Você" };
   const { user } = useUserStore();
@@ -105,7 +106,6 @@ export default function TicketDetailPage({
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [comments]);
 
-  // Só agora os returns condicionais
   if (loading)
     return (
       <div className="flex h-64 items-center justify-center">
@@ -123,14 +123,6 @@ export default function TicketDetailPage({
   function handleSendComment(e: React.FormEvent) {
     e.preventDefault();
     if (!newComment.trim()) return;
-
-    const comment = {
-      id: Date.now(),
-      content: newComment,
-      createdAt: new Date().toISOString(),
-      author: user?.id,
-    };
-    //userTicket
     const loggedData = {
       ticketId: id,
       content: newComment,
@@ -143,11 +135,7 @@ export default function TicketDetailPage({
       externalName: userTicket?.externalName,
       externalEmail: userTicket?.externalEmail,
     };
-    // Emit the new comment to the server
     socket.emit("addComment", userTicket ? externalData : loggedData);
-
-    // Update local state immediately (optional, can rely on WebSocket)
-    //  setComments((prev) => [...prev, comment]);
     setNewComment("");
   }
 
@@ -155,7 +143,9 @@ export default function TicketDetailPage({
     const file = e.target.files?.[0];
     if (!file) return;
 
+    setIsUploading(true); // Ativa o loader
     const formData = new FormData();
+    formData.append("ticketId", String(id));
     formData.append("image", file);
 
     try {
@@ -166,24 +156,26 @@ export default function TicketDetailPage({
       });
 
       const imageUrl = res.data.url;
-      const comment = {
-        id: Date.now(),
-        content: imageUrl,
-        createdAt: new Date().toISOString(),
-        author: user?.id,
-        isImage: true,
-      };
-
-      socket.emit("addComment", {
+      const loggedData = {
         ticketId: id,
         content: imageUrl,
         authorId: user?.id,
         isImage: true,
-      });
+      };
 
-     // setComments((prev) => [...prev, comment]);
+      const externalData = {
+        ticketId: ticketId,
+        content: imageUrl,
+        externalName: userTicket?.externalName,
+        externalEmail: userTicket?.externalEmail,
+        isImage: true,
+      };
+
+      socket.emit("addComment", userTicket ? externalData : loggedData);
     } catch (error) {
       console.error("Erro ao fazer upload da imagem:", error);
+    } finally {
+      setIsUploading(false); // Desativa o loader
     }
   };
 
@@ -366,21 +358,26 @@ export default function TicketDetailPage({
                     accept="image/*"
                     className="hidden"
                     onChange={handleImageUpload}
+                    disabled={isUploading} // Desabilita o input durante o upload
                   />
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 text-gray-600"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                    />
-                  </svg>
+                  {isUploading ? (
+                    <Loader2 className="h-5 w-5 animate-spin text-gray-600" /> // Loader durante o upload
+                  ) : (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5 text-gray-600"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                      />
+                    </svg>
+                  )}
                 </label>
               </div>
               <button
