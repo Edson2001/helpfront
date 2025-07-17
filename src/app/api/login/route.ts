@@ -1,28 +1,28 @@
 import axios from "axios";
 import * as cookie from "cookie";
 import { NextApiRequest, NextApiResponse } from "next";
-export const runtime = 'edge';
+
+export const runtime = "edge";
 export async function POST(req: Request) {
   const { email, password, turnstileToken } = await req.json();
   try {
-    
-    const routePath = process.env.NEXT_PUBLIC_BACK_URL+"/auth/login";
-    console.log(routePath, "routePathroutePathroutePathroutePathroutePath")
-    
+    const routePath = process.env.NEXT_PUBLIC_BACK_URL + "/auth/login";
+
     const response = await axios.post(routePath, {
       email,
       password,
-      turnstileToken
+      turnstileToken,
     });
 
-    const token = response.data; //?.access_token;
+    const token = response.data;
 
     const cookieValue = cookie.serialize("token", token?.access_token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
       path: "/",
-      domain: process.env.NODE_ENV === "development" ? undefined : ".webfacil.site",
+      domain:
+        process.env.NODE_ENV === "development" ? undefined : ".webfacil.site",
       maxAge: 60 * 60 * 24 * 7,
     });
 
@@ -34,7 +34,8 @@ export async function POST(req: Request) {
         secure: process.env.NODE_ENV === "production",
         sameSite: "lax",
         path: "/",
-        domain: process.env.NODE_ENV === "development" ? undefined : ".webfacil.site",
+        domain:
+          process.env.NODE_ENV === "development" ? undefined : ".webfacil.site",
         maxAge: 60 * 60 * 24 * 7,
       },
     );
@@ -47,7 +48,6 @@ export async function POST(req: Request) {
       },
     });
   } catch (error) {
-    console.log(error);
     return new Response(
       JSON.stringify({
         message:
